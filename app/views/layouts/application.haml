@@ -1,0 +1,67 @@
+!!! 5
+%html{ lang: "en" }
+%head
+  %meta{ charset: "UTF-8" }
+  %title Калькулятор доходности
+  = stylesheet_link_tag    "application", :media => "all"
+  = javascript_include_tag "application"
+  = csrf_meta_tags
+
+%body
+  .header
+    / .navbar.navbar-default.navbar-fixed-top
+    /   .container
+    /     %ul.nav.navbar-nav.navbar-left
+    /       %li
+    /         %h4.navbar-text Личный кабинет Revo Plus
+    /     %ul.nav.navbar-nav.navbar-right
+    /       - if @client
+    /         %li
+    /           %p.navbar-text= @client.full_name
+    /       %li
+    /         %a.btn{href: "http://www.revoplus.ru/#!faq/cqqu", 'data-toggle' => "tooltip", 'data-placement' => "bottom",  'title' => "Вопросы и ответы", target: "_blank"}
+    /           %i.fa.fa-question
+    /       %li
+    /         %a.btn{href: client_cabinet_settings_path,'data-toggle' => "tooltip", 'data-placement' => "bottom",  'title' => "Настройки", 'data-remote' => 'true'}
+    /           %i.fa.fa-cog
+    /       %li
+    /         = link_to "Выйти", client_cabinet_session_path, method: :delete, class: "btn"
+  .main
+    / .container-fluid
+    /   .row
+    /     .col-xs-2.affix
+    /       .btn-group-vertical#tabs
+    /         %a.btn.btn-default#btn_info
+    /           .pull-left Общая информация
+    /         %a.btn.btn-default#btn_loans
+    /           .pull-left Мои рассрочки
+    /           .pull-right
+    /             %span.badge= @loans_count
+    /         %a.btn.btn-default#btn_payments
+    /           .pull-left Мои платежи
+    /           .pull-right
+    /             %span.badge#payments_count= @payments_count
+    /         %a.btn.btn-default#btn_faq{ href: "http://www.revoplus.ru/#!faq/cqqu", target: "_blank"  }
+    /           .pull-left
+    /             Вопросы и ответы
+    /           .pull-right
+    /     .col-xs-10.pull-right
+    /       #alert
+    /         - if flash[:notice]
+    /           .alert.alert-success.alert-dismissible.fade.in{ role: :alert }
+    /             %button.close{ 'data-dismiss' => 'alert' }
+    /               %span{ 'aria-hidden' => 'true' } ×
+    /               %span.sr-only= t('.close')
+    /             = flash[:notice]
+    /         - if flash[:error]
+    /           .alert.alert-danger.alert-dismissible.fade.in{ role: :alert }
+    /             %button.close{ 'data-dismiss' => 'alert' }
+    /               %span{ 'aria-hidden' => 'true' } ×
+    /               %span.sr-only= t('.close')
+    /             = flash[:error]
+    #content
+      = yield
+  .footer
+    .container
+      .row
+        .col-md-2.pull-right.navbar-text © 2017 Foxy

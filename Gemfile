@@ -16,8 +16,6 @@ gem 'haml'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'bootstrap-sass'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 
 # Use Puma as the app server
 gem 'puma', group: :production
