@@ -12,8 +12,93 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 
 @import bootstrap-sprockets
 @import bootstrap
-@import font-awesome.css
+@import font-awesome
+
+$link-color:       #697b7c
+$link-color-hover: darken($link-color, 15%)
+$footer-height: 50px
+
+html
+  position: relative
+  min-height: 100%
+
+body
+  background: url('/assets/bg.jpg')
+  margin-bottom: $footer-height
+
+.header
+  .navbar
+    background: #43BDC6
+    color: rgba(0,0,0,0.6)
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.3)
+    border-bottom: 1px #697b7c
+    a
+      color: $link-color
+      text-decoration: none
+      &:hover
+        color: $link-color-hover
+    .navbar-text
+      color: rgba(0,0,0,0.6)
+
+.main
+  padding-top: 70px
+
+.footer
+  position: absolute
+  bottom: 0
+  height: $footer-height
+  background: #43BDC6
+  width: 100%
+.btn-group-vertical
+  width: 100%
+  .btn
+    display: inline-block
+
+table#schedule
+  tbody
+    tr
+      td
+        border: 0
+        width: 50%
+
+table#payments
+  tbody
+    tr
+      td
+        border: 0
+        width: 33%
+
+.spinner
+  span
+    width: auto
+    margin: auto
+
+.form-signin
+  max-width: 330px
+  padding: 15px
+  margin: 0 auto
+
+.pin-code-info
+  font-size: 12px
+
+.clickable
+  cursor: pointer
+
+#payment_form
+  margin-top: 15px
+
+#pin_code_reset
+  background: none
+  border: none
+  color: #337ab7
+  cursor: pointer
+  text-decoration: none
+
+#pin_code_reset:hover, #pin_code_reset:focus
+  color: #23527c
+  text-decoration: underline

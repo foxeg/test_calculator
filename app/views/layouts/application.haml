@@ -2,65 +2,65 @@
 %html{ lang: "en" }
 %head
   %meta{ charset: "UTF-8" }
-  %title Калькулятор доходности
+  %title= t('.application_title')
   = stylesheet_link_tag    "application", :media => "all"
   = javascript_include_tag "application"
   = csrf_meta_tags
 
 %body
   .header
-    / .navbar.navbar-default.navbar-fixed-top
-    /   .container
-    /     %ul.nav.navbar-nav.navbar-left
-    /       %li
-    /         %h4.navbar-text Личный кабинет Revo Plus
-    /     %ul.nav.navbar-nav.navbar-right
-    /       - if @client
-    /         %li
-    /           %p.navbar-text= @client.full_name
-    /       %li
-    /         %a.btn{href: "http://www.revoplus.ru/#!faq/cqqu", 'data-toggle' => "tooltip", 'data-placement' => "bottom",  'title' => "Вопросы и ответы", target: "_blank"}
-    /           %i.fa.fa-question
-    /       %li
-    /         %a.btn{href: client_cabinet_settings_path,'data-toggle' => "tooltip", 'data-placement' => "bottom",  'title' => "Настройки", 'data-remote' => 'true'}
-    /           %i.fa.fa-cog
-    /       %li
-    /         = link_to "Выйти", client_cabinet_session_path, method: :delete, class: "btn"
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        %ul.nav.navbar-nav.navbar-left
+          %li
+            %h4.navbar-text= t('.header_title')
+        - if @authorized
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %p.navbar-text= @authorized.name
+            %li
+              %a.btn{href: investor_path(@authorized),'data-toggle' => "tooltip", 'data-placement' => "bottom",  'title' => t('.settings'), 'data-remote' => 'true'}
+                %i.fa.fa-cog
+            %li
+              = link_to t('.exit'), investor_path(@authorized), method: :delete, class: "btn"
   .main
-    / .container-fluid
-    /   .row
-    /     .col-xs-2.affix
-    /       .btn-group-vertical#tabs
-    /         %a.btn.btn-default#btn_info
-    /           .pull-left Общая информация
-    /         %a.btn.btn-default#btn_loans
-    /           .pull-left Мои рассрочки
-    /           .pull-right
-    /             %span.badge= @loans_count
-    /         %a.btn.btn-default#btn_payments
-    /           .pull-left Мои платежи
-    /           .pull-right
-    /             %span.badge#payments_count= @payments_count
-    /         %a.btn.btn-default#btn_faq{ href: "http://www.revoplus.ru/#!faq/cqqu", target: "_blank"  }
-    /           .pull-left
-    /             Вопросы и ответы
-    /           .pull-right
-    /     .col-xs-10.pull-right
-    /       #alert
-    /         - if flash[:notice]
-    /           .alert.alert-success.alert-dismissible.fade.in{ role: :alert }
-    /             %button.close{ 'data-dismiss' => 'alert' }
-    /               %span{ 'aria-hidden' => 'true' } ×
-    /               %span.sr-only= t('.close')
-    /             = flash[:notice]
-    /         - if flash[:error]
-    /           .alert.alert-danger.alert-dismissible.fade.in{ role: :alert }
-    /             %button.close{ 'data-dismiss' => 'alert' }
-    /               %span{ 'aria-hidden' => 'true' } ×
-    /               %span.sr-only= t('.close')
-    /             = flash[:error]
-    #content
-      = yield
+    .container-fluid
+      - if @authorized
+        .row
+          .col-xs-2
+            .btn-group-vertical#tabs
+              %a.btn.btn-default#btn_info{href: root_path}
+                .pull-left= t('.dashboard')
+              %a.btn.btn-default#btn_payments{href: root_path}
+                .pull-left= t('.my_investments')
+                .pull-right
+                  %span.badge#payments_count= @authorized.investment_packages.count
+              %a.btn.btn-default#btn_loans{href: lendees_path}
+                .pull-left= t('.lendee_list')
+                .pull-right
+                  %span.badge= @lendee_count
+          .col-xs-10.pull-right
+            #alert
+              - if flash[:notice]
+                .alert.alert-success.alert-dismissible.fade.in{ role: :alert }
+                  %button.close{ 'data-dismiss' => 'alert' }
+                    %span{ 'aria-hidden' => 'true' } ×
+                    %span.sr-only= t('.close')
+                  = flash[:notice]
+              - if flash[:error]
+                .alert.alert-danger.alert-dismissible.fade.in{ role: :alert }
+                  %button.close{ 'data-dismiss' => 'alert' }
+                    %span{ 'aria-hidden' => 'true' } ×
+                    %span.sr-only= t('.close')
+                  = flash[:error]
+            #content
+              = yield
+      - else
+        .row
+          .col-xs-4
+          .col-xs-4
+            = yield
+          .col-xs-4
   .footer
     .container
       .row

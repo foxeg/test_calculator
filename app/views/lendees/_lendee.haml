@@ -1,0 +1,11 @@
+.panel
+  .panel-heading
+    .row
+      .col-md-8
+        .panel-text= "#{lendee.name}"
+      .col-md-2
+        .pull-right
+          %span.badge= @authorized.investments.where(lendee: lendee).count
+      .col-md-2
+        .pull-right
+          %span.badge= @authorized.investments.where(lendee: lendee).try(:sum,:amount)

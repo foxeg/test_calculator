@@ -16,7 +16,7 @@ gem 'haml'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'bootstrap-sass'
-
+gem 'font-awesome-rails'
 # Use Puma as the app server
 gem 'puma', group: :production
 
