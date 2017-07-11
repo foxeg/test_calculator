@@ -9,7 +9,7 @@ class InvestmentPlanFact < ActiveRecord::Base
   validates :period_number, numericality: { greater_than:  0 }, presence: true, uniqueness: {scope: :investment_id}
 
   def amount_overdue
-    (amount_plan_principal * (1 + investment.overdue_rate.to_f / 100)).ceil_to(2)
+    (amount_plan_principal + investment.amount * investment.monthly_overdue_rate).ceil_to(2)
   end
 
   def amount_early

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :investment do
     amount 1000000
     base_rate 30
-    overdue_rate 45
+    overdue_rate 50
     status "new"
     lendee
     factory :investment_company_1 do
