@@ -31,5 +31,4 @@
                   = separate_with_quote_and_currency(p.amount_fact)
                 - else
                   = t('investment.plan_fact.payment_missing')
-        - unless investment.payed?
-          %a.btn{href: edit_investment_path(investment), class: "btn btn-primary btn-block pull-right"}= t('.edit_schedule')
+        %a.btn{href: edit_investment_path(investment), class: "btn btn-primary btn-block pull-right"}= t('.edit')

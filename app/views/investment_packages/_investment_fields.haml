@@ -1,7 +1,7 @@
 .nested-fields.form-inline
   .field.form-group
     = f.label :lendee, class: 'sr-only'
-    = f.select(:lendee_id, options_from_collection_for_select(Lendee.all, :id, :name), {}, {class: 'form-control'})
+    = f.select(:lendee_id, options_from_collection_for_select(Lendee.all, :id, :name, f.object.lendee_id), {}, {class: 'form-control'})
   .field.form-group
     = f.label :amount, class: 'sr-only'
     = f.number_field :amount, class: 'form-control', placeholder: true, step: "any"

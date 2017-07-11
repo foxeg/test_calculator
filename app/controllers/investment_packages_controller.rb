@@ -12,13 +12,33 @@ class InvestmentPackagesController < ApplicationController
       if has_unique_lendee?
         @investment_package.save
         flash[:notice] = t(".investment_success")
-        redirect_to root_path
+        render 'show'
       else
         @investment_package.errors.add(:investments, :not_unique_lendee, message: "not_unique_lendee")
         render 'new'
       end  
     else
       render 'new'
+    end
+  end
+
+  def edit
+    @investment_package = InvestmentPackage.find(params[:id])
+  end
+
+  def update
+    @investment_package = InvestmentPackage.find(params[:id])
+
+    if @investment_package.update(investment_package_params)
+      if has_unique_lendee?
+        flash[:notice] = t(".investment_success")
+        render 'show'
+      else
+        @investment_package.errors.add(:investments, :not_unique_lendee, message: "not_unique_lendee")
+        render 'edit'
+      end
+    else
+      render 'edit'
     end
   end
 

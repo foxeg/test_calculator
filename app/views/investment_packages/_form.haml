@@ -1,4 +1,4 @@
-= form_for @investment_package, url: investment_packages_path, method: :post do |f|
+= form_for @investment_package, url: url, method: m do |f|
   #settings_errors
     - if @investment_package.errors.any?
       .alert.alert-sm.alert-danger.fade.in
@@ -12,7 +12,7 @@
     = f.text_field :period, class: 'form-control'
   .form-group#investments
     = f.fields_for :investments, wrapper: 'inline' do |investment|
-      = render 'investment_fields', :f => investment
+      = render 'investment_fields', f: investment
     .form-group.links.pull-right
       = link_to_add_association t('add'), f, :investments, class: "btn btn-success btn-block"
   .form-group
