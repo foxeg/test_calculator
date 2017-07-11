@@ -1,0 +1,11 @@
+.col-xs-4    
+  %a{href: investment_package_path(investment_package)}
+    = InvestmentPackage.model_name.human + " ##{investment_package.id}"
+.col-xs-2
+  %span.badge= investment_package.investments.count
+.col-xs-2
+  %span.badge= investment_package.amount
+.col-xs-2
+  %span.badge= format_rate(investment_package.plan_rate)
+.col-xs-2
+  %span.badge= investment_package.payed? ? format_rate(investment_package.fact_rate) : t('investment_not_payed')

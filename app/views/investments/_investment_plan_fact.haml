@@ -1,0 +1,14 @@
+= form.fields_for :investment_plan_facts, pf, wrapper: 'inline' do |pf_form|
+  .row.nested-fields
+    = pf_form.label :amount_fact, class: 'sr-only'
+    = pf_form.hidden_field :id, value: pf.id
+    .col-xs-2.text-center= pf.period_number
+    .col-xs-2.text-center= separate_with_quote_and_currency(pf.amount_plan_payment)
+    .col-xs-6
+      .input-group
+        = pf_form.label :amount_fact, class: 'sr-only'
+        = pf_form.number_field :amount_fact, disabled: false,  class: 'form-control payment_input', 'data-id': pf.period_number, step: "any"
+        %span.input-group-btn
+          %a.btn.btn-info.plan_payment{'data-id': pf.period_number}= t('.plan_payment')
+          %a.btn.btn-info.overdue_payment{'data-id': pf.period_number}= t('.overdue_payment')
+          %a.btn.btn-info.early_payment{'data-id': pf.period_number}= t('.early_payment')

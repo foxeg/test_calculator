@@ -1,0 +1,14 @@
+.row
+  .col-md-2
+    %a.btn{href: new_investment_package_path, class: "btn btn-primary btn-block"}= t('.create')
+%br
+- if @investment_packages.count > 0
+  .panel.panel-info
+    .panel-body
+      .panel-group#ip_accordion
+        - @investment_packages.each_with_index do |investment_package, index|
+          = render 'investment_package', investment_package: investment_package, index: index
+
+:javascript
+  $(".panel-heading.clickable:first").click()
+

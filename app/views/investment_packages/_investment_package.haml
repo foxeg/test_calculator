@@ -1,0 +1,25 @@
+- klass = investment_package.payed? ? "success" : "warning"
+.panel{class: "panel-#{klass}"}
+  .panel-heading.clickable{'data-toggle' => 'collapse', 'data-parent' => '#ip_accordion','data-target' => "#accordion#{index}"}
+    = InvestmentPackage.model_name.human + " ##{investment_package.id}"
+    .label{class: "label-#{klass}"}= investment_package.created_at.to_date
+  .panel-collapse.collapse{id: "accordion#{index}"}
+    .panel-body
+      .row 
+        .col-md-8
+          %dl.dl-horizontal
+            %dt= t('investment.status')
+            %dd
+              .label{class: "label-#{klass}"}= investment_package.payed? ? t('investment.payed') : t('investment.not_payed')
+            %dt= t('investment.period')
+            %dd= investment_package.period
+            %dt= t('investment.sum')
+            %dd= separate_with_quote_and_currency(investment_package.amount)
+            %dt= t('investment.profitability.planed')
+            %dd= format_rate(investment_package.plan_rate)
+            %dt= t('investment.profitability.actual')
+            %dd= investment_package.payed? ? format_rate(investment_package.fact_rate) : t('investment.not_payed')
+
+      .row
+        - investment_package.investments.each do |investment|
+          = render 'investment', investment: investment

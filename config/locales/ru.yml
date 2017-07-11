@@ -44,15 +44,104 @@ ru:
       greeting: "Добро пожаловать в личный кабинет инвестора. Для прохождения регистрации укажите ваше имя:"
     create:
       authorization_success: "Вы успешно зарегистрировались в личном кабинете и можете сделать свои первые инвестиции"
+  investment_packages:
+    new:
+      description: "Выберите срок инвестиций, компании, в которые желаете вложить и сумму инвестиций"
+    form:
+      save: "Инвестировать"
+    create:
+      investment_success: "Вы успешно вложили деньги, следите за выплатами компании и получайте дивиденды!"
+    investment:
+      edit: "Внести информацию о платежах"
+    index:
+      create: "Инвестировать"
+  investments:
+    edit:
+      save: "Внести информацию о платежах"
+    update:
+      investment_payed: "Заёмщик полностью выплатил свои обязательства"
+      schedule_update_success: "Выплаты успешно обновлены"
+    investment_plan_fact:
+      plan_payment: "По плану"
+      overdue_payment: "Просрочен"
+      early_payment: "Досрочно"
+  dashboard:
+    index:
+      statistics: "Статистика"
+      investments_missing: "Вы пока не делали инвестиций"
+      create: "Инвестировать"
+    investment_package:
+      investment_not_payed: "Ожидает возврата"
+  lendees:
+    index:
+      name: "Название"
   activerecord:
-    errors:
-      models:
-        investor:
-          attributes:
-            name:
-              blank: "не может быть пустым"
+    models:
+      lendee:
+        one: "Заёмщик"
+        other: "Заёмщики"
+      investor:
+        one: "Инвестор"
+        other: "Инвесторы"
+      investment_package:
+        one: "Пакет инвестиций"
+        other: "Пакеты инвестиций"
+      investment:
+        one: "Инвестиция"
+        other: "инвестиции"
     attributes:
       investor:
         name: "Имя"
+      investment_package:
+        period: "Срок инвестиций (мес)"
+        investments: "Инвестиция"
+      lendee:
+        name: "Название"
+      investments:
+        amount: "Сумма инвестиции"
+        base_rate: "Базовая ставка"
+        overdue_rate: "Ставка при просрочке"
+    errors:
+      models:
+        investment_package:
+          attributes:
+            investments:
+              too_short: "Должна быть хотя бы одна инвестиция в компанию"
+              not_unique_lendee: "В рамках одно пакета можно инвестировать средства только в одну компанию"
+        investment:
+          attributes:
+            lendee:
+              uniqueness: "В рамках одно пакета можно инвестировать средства только в одну компанию"
+  helpers:
+    placeholder:
+      investment:
+        amount: "Сумма инвестиции"
+        base_rate: "Базовая ставка"
+        overdue_rate: "Ставка при просрочке"
   field: "Поле"
   create: "Создать"
+  add: "Добавить"
+  remove: "Удалить"
+  ruble: "₽"
+  investment:
+    count: "Количество инвестиций"
+    sum: "Сумма инвестиций"
+    payed: "Дивиденды получены"
+    not_payed: "Ожидает возврата"
+    period: "Срок"
+    status: "Статус"
+    profitability:
+      planed: "Плановая доходность"
+      actual: "Фактическая доходность"
+    base_rate: "Базовая ставка"
+    overdue_rate: "Ставка при просрочке"
+    plan_fact_schedule: "График платежей"
+    plan_fact:
+      amount_plan: "Плановый платёж"
+      amount_fact: "Фактический платёж"
+      period_number: "Платежный период"
+      payment_missing: "Ожидается"
+  errors:
+    messages:
+      blank: "не может быть пустым"
+      not_a_number: "должно быть числом"

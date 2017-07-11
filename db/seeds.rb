@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+puts "Loading Lendees"
+Lendee.find_or_create_by(name: 'Юр. лицо 1')
+Lendee.find_or_create_by(name: 'Юр. лицо 2')
+Lendee.find_or_create_by(name: 'Юр. лицо 3')
+Lendee.find_or_create_by(name: 'Юр. лицо 4')

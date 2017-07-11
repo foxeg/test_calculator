@@ -1,0 +1,35 @@
+.panel.panel-info
+  .panel-body
+    .row
+      .col-md-4
+        %dl.dl-horizontal
+          %dt Компания
+          %dd=  investment.lendee.name
+          %dt= t('investment.period')
+          %dd= investment.period
+          %dt= t('investment.sum')
+          %dd= investment.amount
+          %dt= t('investment.base_rate')
+          %dd= format_rate(investment.base_rate)
+          %dt= t('investment.overdue_rate')
+          %dd= format_rate(investment.overdue_rate)
+      .col-md-8
+        .text-center= t('investment.plan_fact_schedule')
+        %table.table.table-striped.table-condensed#schedule
+          %tr
+            %td.text-center= t('investment.plan_fact.period_number')
+            %td.text-center= t('investment.plan_fact.amount_plan')
+            %td.text-center= t('investment.plan_fact.amount_fact')
+          - payments = investment.investment_plan_facts
+          - payments.each do |p|
+            %tr
+              %td.text-center
+                %span.label.label-default= p.period_number
+              %td.text-center= separate_with_quote_and_currency(p.amount_plan_payment)
+              %td.text-center
+                -if p.amount_fact
+                  = separate_with_quote_and_currency(p.amount_fact)
+                - else
+                  = t('investment.plan_fact.payment_missing')
+        - unless investment.payed?
+          %a.btn{href: edit_investment_path(investment), class: "btn btn-primary btn-block pull-right"}= t('.edit_schedule')

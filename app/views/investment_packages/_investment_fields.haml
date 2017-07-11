@@ -1,0 +1,17 @@
+.nested-fields.form-inline
+  .field.form-group
+    = f.label :lendee, class: 'sr-only'
+    = f.select(:lendee_id, options_from_collection_for_select(Lendee.all, :id, :name), {}, {class: 'form-control'})
+  .field.form-group
+    = f.label :amount, class: 'sr-only'
+    = f.number_field :amount, class: 'form-control', placeholder: true, step: "any"
+  .field.form-group
+    = f.label :base_rate, class: 'sr-only'
+    = f.number_field :base_rate, class: 'form-control', placeholder: true, step: "any"
+  .field.form-group
+    = f.label :overdue_rate, class: 'sr-only'
+    = f.number_field :overdue_rate, class: 'form-control', placeholder: true, step: "any"
+  .form-group.hidden
+    = f.label :status, class: 'sr-only'
+    = f.hidden_field :status, value: "new"
+  = link_to_remove_association t('remove'), f, class: 'btn btn-danger btn-block"'

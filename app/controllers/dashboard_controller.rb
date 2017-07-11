@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    if @autorized
+    if @authorized
     else
       redirect_to new_investor_path
     end

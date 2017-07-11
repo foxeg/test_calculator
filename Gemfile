@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.8'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
+
+gem "cocoon"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -26,11 +29,13 @@ gem 'rails_12factor', group: :production
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
   # Rspec
   gem 'rspec'
   gem 'rspec-rails', '~> 3.5'
-  gem 'rspec-mocks'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'factory_girl_rails', "~> 4.0"
+  gem 'ffaker'
 end
 
 ruby "2.3.3"

@@ -1,19 +1,18 @@
 .panel.panel-info
   .panel-body
     - if @lendees.count > 0
-      .panel
+      .panel.panel-info
         .panel-heading
           .row
-            .col-md-8
+            .col-md-8.col-sm-6.col-xs-4
               .panel-text= t('.name')
-            .col-md-2
-              .pull-right
-                .panel-text= t('.investment_count')
-            .col-md-2
-              .pull-right
-                .panel-text= t('.investment_sum')        
-      - @lendees.each do |lendee|
-        = render 'lendee', lendee: lendee, investor: @authorized
+            .col-md-2.col-sm-3.col-xs-4
+              .panel-text= t('.investment_count')
+            .col-md-2.col-sm-3.col-xs-4
+              .panel-text= t('.investment_sum')        
+        .panel-body
+          - @lendees.each do |lendee|
+            = render 'lendee', lendee: lendee, investor: @authorized
     - else
       %p= t('.lendee_missing')
       %a.btn{href: new_lendee_path, class: "btn btn-primary btn-block"}= t('create')

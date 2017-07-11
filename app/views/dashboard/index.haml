@@ -1,2 +1,30 @@
-.test
-  Sample text
+.row
+  .col-md-2
+    %a.btn{href: new_investment_package_path, class: "btn btn-primary btn-block"}= t('.create')
+%br
+.panel.panel-info
+  .panel-heading
+    = t('.statistics')
+  .panel-body
+    - if @authorized.investment_packages.count > 0
+      .panel
+        .panel-heading
+          .row
+            .col-xs-4
+              %span.label.label-info= InvestmentPackage.model_name.human
+            .col-xs-2
+              %span.label.label-info= t('investment.count')
+            .col-xs-2
+              %span.label.label-info= t('investment.sum')
+            .col-xs-2
+              %span.label.label-info= t('investment.profitability.planed')
+            .col-xs-2
+              %span.label.label-info= t('investment.profitability.actual')
+      - @authorized.investment_packages.each do |ip|
+        = render 'investment_package', investment_package: ip, investor: @authorized
+    - else
+      %p= t('.investments_missing')
+      .row
+        .col-md-2
+          %a.btn{href: new_investment_package_path, class: "btn btn-primary btn-block"}= t('.create')
+

@@ -1,11 +1,7 @@
-.panel
-  .panel-heading
-    .row
-      .col-md-8
-        .panel-text= "#{lendee.name}"
-      .col-md-2
-        .pull-right
-          %span.badge= @authorized.investments.where(lendee: lendee).count
-      .col-md-2
-        .pull-right
-          %span.badge= @authorized.investments.where(lendee: lendee).try(:sum,:amount)
+.row
+  .col-md-8.col-sm-6.col-xs-4
+    .panel-text= "#{lendee.name}"
+  .col-md-2.col-sm-3.col-xs-4
+    %span.badge= @authorized.investments.where(lendee: lendee).count
+  .col-md-2.col-sm-3.col-xs-4
+    %span.badge= separate_with_quote_and_currency @authorized.investments.where(lendee: lendee).try(:sum,:amount)

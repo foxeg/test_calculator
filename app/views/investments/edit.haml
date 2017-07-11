@@ -1,0 +1,16 @@
+= form_for @investment, url: investment_path, method: :patch do |f|
+  #settings_errors
+    - if @investment.errors.any?
+      .alert.alert-sm.alert-danger.fade.in
+        %ul
+          - @investment.errors.full_messages.each do |msg|
+            %li= t('field') + ' ' + msg
+  .row.nested-fields
+    .col-xs-2= "Период"
+    .col-xs-2= "Плановый платеж"
+    .col-xs-2= "Фактический платеж"
+    .col-xs-2
+  - @investment.investment_plan_facts.each do |pf|
+    = render 'investment_plan_fact', pf: pf, form: f
+  .col-xs-4
+    = submit_tag t('.save'), class: "btn btn-primary btn-block"

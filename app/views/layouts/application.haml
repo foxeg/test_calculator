@@ -1,7 +1,7 @@
 !!! 5
 %html{ lang: "en" }
 %head
-  %meta{ charset: "UTF-8" }
+  %meta{ charset: "UTF-8", name: "viewport", content:"width=device-width, initial-scale=1" }
   %title= t('.application_title')
   = stylesheet_link_tag    "application", :media => "all"
   = javascript_include_tag "application"
@@ -18,20 +18,20 @@
           %ul.nav.navbar-nav.navbar-right
             %li
               %p.navbar-text= @authorized.name
-            %li
-              %a.btn{href: investor_path(@authorized),'data-toggle' => "tooltip", 'data-placement' => "bottom",  'title' => t('.settings'), 'data-remote' => 'true'}
-                %i.fa.fa-cog
+            / %li
+            /   %a.btn{href: investor_path(@authorized),'data-toggle' => "tooltip", 'data-placement' => "bottom",  'title' => t('.settings'), 'data-remote' => 'true'}
+            /     %i.fa.fa-cog
             %li
               = link_to t('.exit'), investor_path(@authorized), method: :delete, class: "btn"
   .main
     .container-fluid
       - if @authorized
         .row
-          .col-xs-2
+          .col-lg-2.col-md-3.col-sm-4.col-xs-12
             .btn-group-vertical#tabs
               %a.btn.btn-default#btn_info{href: root_path}
                 .pull-left= t('.dashboard')
-              %a.btn.btn-default#btn_payments{href: root_path}
+              %a.btn.btn-default#btn_payments{href: investment_packages_path}
                 .pull-left= t('.my_investments')
                 .pull-right
                   %span.badge#payments_count= @authorized.investment_packages.count
@@ -39,7 +39,7 @@
                 .pull-left= t('.lendee_list')
                 .pull-right
                   %span.badge= @lendee_count
-          .col-xs-10.pull-right
+          .col-lg-10.col-md-9.col-sm-8.col-xs-12.pull-right
             #alert
               - if flash[:notice]
                 .alert.alert-success.alert-dismissible.fade.in{ role: :alert }
@@ -57,11 +57,11 @@
               = yield
       - else
         .row
-          .col-xs-4
-          .col-xs-4
+          .col-md-4.col-sm-3.col-xs-2
+          .col-md-4.col-sm-6.col-xs-8
             = yield
-          .col-xs-4
+          .col-md-4.col-sm-3.col-xs-2
   .footer
     .container
       .row
-        .col-md-2.pull-right.navbar-text © 2017 Foxy
+        .col-xs-2.pull-right.navbar-text © 2017 Foxy 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170707134308) do
+ActiveRecord::Schema.define(version: 20170710120102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,11 +27,13 @@ ActiveRecord::Schema.define(version: 20170707134308) do
 
   create_table "investment_plan_facts", force: :cascade do |t|
     t.integer  "investment_id"
-    t.decimal  "amount_plan",   precision: 15, scale: 2
-    t.decimal  "amount_fact",   precision: 15, scale: 2
+    t.decimal  "amount_plan_payment",   precision: 15, scale: 2
+    t.decimal  "amount_fact",           precision: 15, scale: 2
     t.integer  "period_number"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.decimal  "amount_plan_interest",  precision: 15, scale: 2
+    t.decimal  "amount_plan_principal", precision: 15, scale: 2
   end
 
   add_index "investment_plan_facts", ["investment_id"], name: "index_investment_plan_facts_on_investment_id", using: :btree
@@ -44,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170707134308) do
     t.float    "overdue_rate"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.string   "status"
   end
 
   add_index "investments", ["investment_package_id"], name: "index_investments_on_investment_package_id", using: :btree
