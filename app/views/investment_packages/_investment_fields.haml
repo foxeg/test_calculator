@@ -13,5 +13,5 @@
     = f.number_field :overdue_rate, class: 'form-control', placeholder: true, step: "any"
   .form-group.hidden
     = f.label :status, class: 'sr-only'
-    = f.hidden_field :status, value: "new"
+    = f.hidden_field :status, value: (f.object.status || "new")
   = link_to_remove_association t('remove'), f, class: 'btn btn-danger btn-block"'
